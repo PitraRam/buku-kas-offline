@@ -8,59 +8,55 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
 </head>
-<body class="bg-gray-100 p-6">
-    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+<body class="bg-gray-100 p-4 sm:p-6">
+    <div class="max-w-2xl mx-auto bg-white p-5 sm:p-6 rounded-lg shadow-md">
         <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Buku Kas Offline (PWA)</h1>
         
-        <form id="finance-form" class="space-y-4 mb-8">
+        <form id="finance-form" class="space-y-4 mb-6">
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-medium">Jenis</label>
-                    <select id="jenis" class="w-full p-2 border rounded">
-                        <option value="masuk">Uang Masuk</option>
-                        <option value="keluar">Uang Keluar</option>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kas</label>
+                    <select id="jenis" class="w-full p-2.5 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500">
+                        <option value="masuk">📈 Uang Masuk</option>
+                        <option value="keluar">📉 Uang Keluar</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Nominal</label>
-                    <input type="number" id="nominal" required class="w-full p-2 border rounded" placeholder="Contoh: 50000">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nominal (Rp)</label>
+                    <input type="number" id="nominal" required class="w-full p-2.5 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 50000">
                 </div>
             </div>
             <div>
-                <label class="block text-sm font-medium">Keterangan</label>
-                <input type="text" id="keterangan" required class="w-full p-2 border rounded" placeholder="Sebutkan keperluan...">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Keterangan / Keperluan</label>
+                <input type="text" id="keterangan" required class="w-full p-2.5 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500" placeholder="Sebutkan alasan transaksi...">
             </div>
-            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Simpan Transaksi</button>
+            <button type="submit" class="w-full bg-blue-600 text-white p-2.5 rounded-lg font-semibold hover:bg-blue-700 transition shadow-sm">
+                💾 Simpan Transaksi Offline
+            </button>
         </form>
 
-        <div class="mb-6 p-4 bg-gray-50 rounded-lg text-center font-bold text-lg">
-            Saldo Saat Ini: <span id="total-saldo" class="text-green-600">Rp 0</span>
+        <div class="mb-4 p-4 bg-gray-50 rounded-lg text-center font-bold text-lg border border-gray-200">
+            Total Saldo Saat Ini: <span id="total-saldo" class="text-green-600">Rp 0</span>
         </div>
 
-        <h2 class="text-xl font-semibold mb-3">Riwayat Transaksi</h2>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="p-2 border">Tanggal</th>
-                        <th class="p-2 border">Jenis</th>
-                        <th class="p-2 border">Keterangan</th>
-                        <th class="p-2 border">Nominal</th>
-                    </tr>
-                </thead>
-                <!-- Tombol Backup dan Restore -->
-<div class="flex gap-4 mb-6">
-    <button id="export-btn" class="flex-1 bg-green-600 text-white p-2 rounded hover:bg-green-700 font-medium text-sm">
-        📥 Ekspor Data (CSV)
-    </button>
-    <label class="flex-1 bg-amber-500 text-white p-2 rounded hover:bg-amber-600 font-medium text-sm text-center cursor-pointer">
-        📤 Impor Data Backup
-        <input type="file" id="import-input" accept=".csv" class="hidden">
-    </label>
-</div>
-                <tbody id="transaction-history"></tbody>
-            </table>
+        <div class="flex gap-4 mb-6">
+            <button id="export-btn" class="flex-1 bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 font-medium text-sm transition text-center">
+                📥 Ekspor Data (CSV)
+            </button>
+            <label class="flex-1 bg-amber-500 text-white p-2 rounded-lg hover:bg-amber-600 font-medium text-sm text-center cursor-pointer transition">
+                📤 Impor Data Backup
+                <input type="file" id="import-input" accept=".csv" class="hidden">
+            </label>
         </div>
+
+        <hr class="border-gray-200 mb-6">
+
+        <h2 class="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+            📊 Laporan & Riwayat Transaksi
+        </h2>
+        
+        <div id="monthly-container" class="space-y-6">
+            </div>
     </div>
 
     <script src="app.js"></script>
